@@ -1,4 +1,4 @@
-<!-- Main Chat Area - Empty State -->
+<!-- Personal Mesage page -->
 <main class="flex-1 flex flex-col items-center justify-center bg-background-light dark:bg-background-dark p-12 text-center">
     <div class="max-w-md flex flex-col items-center">
 
@@ -41,3 +41,49 @@
 
     </div>
 </main>
+
+<!-- Group Discussions Page -->
+<main class="flex-1 flex flex-col items-center justify-center bg-slate-50 dark:bg-background-dark p-6 text-center">
+    <div class="max-w-md w-full flex flex-col items-center">
+
+        <!-- Illustration -->
+        <div class="size-64 mb-8 text-slate-200 dark:text-[#1e2e3d]">
+            <div class="relative">
+                <span class="material-symbols-outlined text-[160px] opacity-20" style="font-variation-settings: 'FILL' 1">forum</span>
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="bg-primary/10 p-8 rounded-full">
+                        <span class="material-symbols-outlined text-6xl text-primary/40">groups</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Heading -->
+        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">Your Group Discussions</h3>
+
+        <!-- Description -->
+        <p class="text-slate-500 dark:text-[#92adc9] mb-8 leading-relaxed">
+            Select a group from the list on the left to start collaborating with your team, or create a new group to start a project.
+        </p>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-4">
+            <button class="bg-white dark:bg-[#233648] hover:bg-slate-100 dark:hover:bg-[#2d465c] text-slate-900 dark:text-white font-semibold py-2.5 px-6 rounded-xl border border-slate-200 dark:border-transparent transition-all shadow-sm">
+                View Contacts
+            </button>
+            <button class="bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20">
+                Create New Group
+            </button>
+        </div>
+
+        <!-- Quick Tip -->
+        <div class="mt-16 pt-8 border-t border-slate-200 dark:border-[#233648] w-full max-w-xs">
+            <p class="text-[11px] font-bold text-slate-400 dark:text-[#5c7c9b] uppercase tracking-widest mb-4">Quick Tip</p>
+            <p class="text-xs text-slate-400 dark:text-[#7a9bbd] italic">
+                "You can mention members in groups by typing @ followed by their name."
+            </p>
+        </div>
+
+    </div>
+</main>
+

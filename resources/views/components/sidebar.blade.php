@@ -61,59 +61,80 @@
                 </div>
             </div>
             <div class="flex-1 overflow-y-auto no-scrollbar">
-                <!-- Chat Items -->
-                <div class="flex items-center gap-4 bg-primary/10 dark:bg-[#233648] px-5 min-h-[80px] py-3 cursor-pointer border-l-4 border-primary">
-                    <div class="relative">
-                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Sarah Miller" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNsvZcLVpRGVAvppGMD3bhD1LpSbcP1mLW4k6Z65Rmchg55RjUpduUaf7NyCbzetEYVzkVK1bBbKJTeURWqhJnjnN-kaAvtLHP1Ie2j1y4u-WIIZ_0gk4ElJJ7-NtdEvJEd7hUXDqHFdzSTo-X1hRcBl0OQxR30aJltbnh-13odRPDqbUI5bqkdgkgNCDhQfOfvnxVWA1diqVLTMynL6aYPXvG_I5TPE8X6cKp2CZyQdVmwoRKV4GANY_O3nsXojFXl306VnPkVOE");'></div>
-                        <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
-                    </div>
-                    <div class="flex flex-col justify-center flex-1 min-w-0">
-                        <div class="flex justify-between items-center mb-0.5">
-                            <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Sarah Miller</p>
-                            <p class="text-primary text-[11px] font-medium">10:30 AM</p>
+                <div>
+                    <!-- Chat Items -->
+                    <div class="flex items-center gap-4 bg-primary/10 dark:bg-[#233648] px-5 min-h-[80px] py-3 cursor-pointer border-l-4 border-primary">
+                        <div class="relative">
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Sarah Miller" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNsvZcLVpRGVAvppGMD3bhD1LpSbcP1mLW4k6Z65Rmchg55RjUpduUaf7NyCbzetEYVzkVK1bBbKJTeURWqhJnjnN-kaAvtLHP1Ie2j1y4u-WIIZ_0gk4ElJJ7-NtdEvJEd7hUXDqHFdzSTo-X1hRcBl0OQxR30aJltbnh-13odRPDqbUI5bqkdgkgNCDhQfOfvnxVWA1diqVLTMynL6aYPXvG_I5TPE8X6cKp2CZyQdVmwoRKV4GANY_O3nsXojFXl306VnPkVOE");'></div>
+                            <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
                         </div>
-                        <p class="text-slate-500 dark:text-[#92adc9] text-xs font-medium line-clamp-1">Can we review the Q4 results later?</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
-                    <div class="relative">
-                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Design Team Group Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBWHidZib66B-OPO-wqoZm6IoW1raY3oSMl2HKxIBVzP2ilSdR5uOKPSopVwOMUqFxR_bJurzpV95UPthNNhNSUBkVLWBfOjM_88L8K7gQuy5wqrB1IzQm9CnP3JvS0ZCKcq4Dnux2x6bS1-ooxoG7mfDrJozQCygehKaW9CSmshj26K4ya9ZUN-MmnHHjxya65heVqgEhl0xBxzbdfPUYwdU-unPnGoMUN70xfuNbcYc7R51GBW2bE-0AN-rHhPRUtVC4Qr04gBVM");'></div>
-                        <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
-                    </div>
-                    <div class="flex flex-col justify-center flex-1 min-w-0">
-                        <div class="flex justify-between items-center mb-0.5">
-                            <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Design Team</p>
-                            <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Yesterday</p>
-                        </div>
-                        <div class="flex items-center gap-1">
-                            <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1 flex-1">New mockups are ready for review</p>
-                            <div class="size-2 rounded-full bg-primary"></div>
+                        <div class="flex flex-col justify-center flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Sarah Miller</p>
+                                <p class="text-primary text-[11px] font-medium">10:30 AM</p>
+                            </div>
+                            <p class="text-slate-500 dark:text-[#92adc9] text-xs font-medium line-clamp-1">Can we review the Q4 results later?</p>
                         </div>
                     </div>
-                </div>
-                <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of James Wilson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqaBb7MEf_GGLu1MR5KpDCfSHJ15HJc9CuaDP8M3mSyFqWNWavZroSUh5gmJ4QoSTAWB9VSmjg061ne_SedNYqo0MeEvyVjHW4rOzJF0eQSMSMWwL7QBoHSgx7vU5hg3qHRHlHensBvxlePMrHuItHplqSDU6qPBPZXp0RO-MNDn1_FWsNhC83kCnlkrfdScImjfyAzMd3CGHg-mn5MJfY9V-pZHHE2pxVJbGhZgcAzEmLFVdKigTiKwZHWtXy3IfN64Pm-QLwkG4");'></div>
-                    <div class="flex flex-col justify-center flex-1 min-w-0">
-                        <div class="flex justify-between items-center mb-0.5">
-                            <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">James Wilson</p>
-                            <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Oct 24</p>
+                    <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
+                        <div class="relative">
+                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Design Team Group Avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBWHidZib66B-OPO-wqoZm6IoW1raY3oSMl2HKxIBVzP2ilSdR5uOKPSopVwOMUqFxR_bJurzpV95UPthNNhNSUBkVLWBfOjM_88L8K7gQuy5wqrB1IzQm9CnP3JvS0ZCKcq4Dnux2x6bS1-ooxoG7mfDrJozQCygehKaW9CSmshj26K4ya9ZUN-MmnHHjxya65heVqgEhl0xBxzbdfPUYwdU-unPnGoMUN70xfuNbcYc7R51GBW2bE-0AN-rHhPRUtVC4Qr04gBVM");'></div>
+                            <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
                         </div>
-                        <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1">I've sent over the contract for signing.</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
-                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Emily Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVdH3pIimvh612EB2704O_k7Wp-GrebQyLODyZEGgVa9Tfyc0Ci2QD1-bS8e1FmcouMmXXW_tShNvLQTqvbXspwUvZUldQLVmi25GTY_p2FN9FdKXdG8Ggka9u5S5pyPwszqrNp95xyt_fLVlg1EBYEnMD6g-kZyNr49IUuMFTHwXz7IvzZ522bQ1S4RY1jaQRiYWgRE-4WU6dbf6Cc6zw398A6aEtzzhMXzqWIhJ-0Lw_QIBkNWO-ujcChQAudLTvcAQolb7GwMQ");'></div>
-                    <div class="flex flex-col justify-center flex-1 min-w-0">
-                        <div class="flex justify-between items-center mb-0.5">
-                            <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Emily Chen</p>
-                            <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Oct 23</p>
+                        <div class="flex flex-col justify-center flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Design Team</p>
+                                <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Yesterday</p>
+                            </div>
+                            <div class="flex items-center gap-1">
+                                <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1 flex-1">New mockups are ready for review</p>
+                                <div class="size-2 rounded-full bg-primary"></div>
+                            </div>
                         </div>
-                        <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1">The meeting has been rescheduled to Friday.</p>
                     </div>
+                    <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of James Wilson" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqaBb7MEf_GGLu1MR5KpDCfSHJ15HJc9CuaDP8M3mSyFqWNWavZroSUh5gmJ4QoSTAWB9VSmjg061ne_SedNYqo0MeEvyVjHW4rOzJF0eQSMSMWwL7QBoHSgx7vU5hg3qHRHlHensBvxlePMrHuItHplqSDU6qPBPZXp0RO-MNDn1_FWsNhC83kCnlkrfdScImjfyAzMd3CGHg-mn5MJfY9V-pZHHE2pxVJbGhZgcAzEmLFVdKigTiKwZHWtXy3IfN64Pm-QLwkG4");'></div>
+                        <div class="flex flex-col justify-center flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">James Wilson</p>
+                                <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Oct 24</p>
+                            </div>
+                            <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1">I've sent over the contract for signing.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Emily Chen" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVdH3pIimvh612EB2704O_k7Wp-GrebQyLODyZEGgVa9Tfyc0Ci2QD1-bS8e1FmcouMmXXW_tShNvLQTqvbXspwUvZUldQLVmi25GTY_p2FN9FdKXdG8Ggka9u5S5pyPwszqrNp95xyt_fLVlg1EBYEnMD6g-kZyNr49IUuMFTHwXz7IvzZ522bQ1S4RY1jaQRiYWgRE-4WU6dbf6Cc6zw398A6aEtzzhMXzqWIhJ-0Lw_QIBkNWO-ujcChQAudLTvcAQolb7GwMQ");'></div>
+                        <div class="flex flex-col justify-center flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Emily Chen</p>
+                                <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">Oct 23</p>
+                            </div>
+                            <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1">The meeting has been rescheduled to Friday.</p>
+                        </div>
+                    </div>
+
+                    <!-- Chat Item: Product Launch 2024 -->
+                    <div class="flex items-center gap-4 hover:bg-slate-50 dark:hover:bg-white/5 px-5 min-h-[80px] py-3 cursor-pointer transition-colors border-l-4 border-transparent">
+                        <div class="relative h-12 w-12 shrink-0 group-avatar-collage bg-slate-200 dark:bg-[#233648]">
+                            <div class="bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBNsvZcLVpRGVAvppGMD3bhD1LpSbcP1mLW4k6Z65Rmchg55RjUpduUaf7NyCbzetEYVzkVK1bBbKJTeURWqhJnjnN-kaAvtLHP1Ie2j1y4u-WIIZ_0gk4ElJJ7-NtdEvJEd7hUXDqHFdzSTo-X1hRcBl0OQxR30aJltbnh-13odRPDqbUI5bqkdgkgNCDhQfOfvnxVWA1diqVLTMynL6aYPXvG_I5TPE8X6cKp2CZyQdVmwoRKV4GANY_O3nsXojFXl306VnPkVOE");'></div>
+                            <div class="bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCqaBb7MEf_GGLu1MR5KpDCfSHJ15HJc9CuaDP8M3mSyFqWNWavZroSUh5gmJ4QoSTAWB9VSmjg061ne_SedNYqo0MeEvyVjHW4rOzJF0eQSMSMWwL7QBoHSgx7vU5hg3qHRHlHensBvxlePMrHuItHplqSDU6qPBPZXp0RO-MNDn1_FWsNhC83kCnlkrfdScImjfyAzMd3CGHg-mn5MJfY9V-pZHHE2pxVJbGhZgcAzEmLFVdKigTiKwZHWtXy3IfN64Pm-QLwkG4");'></div>
+                            <div class="bg-cover bg-center" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCVdH3pIimvh612EB2704O_k7Wp-GrebQyLODyZEGgVa9Tfyc0Ci2QD1-bS8e1FmcouMmXXW_tShNvLQTqvbXspwUvZUldQLVmi25GTY_p2FN9FdKXdG8Ggka9u5S5pyPwszqrNp95xyt_fLVlg1EBYEnMD6g-kZyNr49IUuMFTHwXz7IvzZ522bQ1S4RY1jaQRiYWgRE-4WU6dbf6Cc6zw398A6aEtzzhMXzqWIhJ-0Lw_QIBkNWO-ujcChQAudLTvcAQolb7GwMQ");'></div>
+                            <div class="bg-slate-300 dark:bg-[#324d67] flex items-center justify-center text-[8px] font-bold text-slate-600 dark:text-[#92adc9]">+8</div>
+                        </div>
+                        <div class="flex flex-col justify-center flex-1 min-w-0">
+                            <div class="flex justify-between items-center mb-0.5">
+                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">Product Launch 2024</p>
+                                <p class="text-slate-400 dark:text-[#92adc9] text-[11px]">10:30 AM</p>
+                            </div>
+                            <p class="text-slate-500 dark:text-[#92adc9] text-xs font-medium line-clamp-1">
+                                <span class="text-primary">Sarah:</span> Can we review the Q4 results?
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
         {{ $slot ?? '' }}
-        
     </div>
 </div>
