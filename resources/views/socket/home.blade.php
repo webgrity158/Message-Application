@@ -2,7 +2,6 @@
 @section('title', 'Socket Test')
 @section('content')
     <x-sidebar>
-        <x-personal-chat />
-        <x-group-chat />
+        <x-chat-area />
     </x-sidebar>
 @endsection

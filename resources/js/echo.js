@@ -11,4 +11,3 @@ window.Echo = new Echo({
 
 // Provide a lowercase alias so `window.echo` is available in the console
 window.echo = window.Echo;
-console.log('Echo initialized:', window.Echo);
