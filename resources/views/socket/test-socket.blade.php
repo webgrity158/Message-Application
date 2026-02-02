@@ -1,8 +1,0 @@
-@extends('layouts.app')
-@section('title', 'Socket Test')
-@section('content')
-    <x-sidebar>
-        <x-personal-chat />
-        <x-group-chat />
-    </x-sidebar>
-@endsection
