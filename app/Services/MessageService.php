@@ -25,7 +25,8 @@ class MessageService
                     "unread" => true,
                     "is_sent_by_me" => false,
                     "type" => "1",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 7,
                 ],
                 [
                     "id" => 2,
@@ -34,9 +35,10 @@ class MessageService
                     "message" => "New mockups are ready for review.",
                     "time" => "Yesterday",
                     "unread" => false,
-                    "is_sent_by_me" => false,
+                    "is_sent_by_me" => true,
                     "type" => "1",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 1,
                 ],
                 [
                     "id" => 3,
@@ -70,7 +72,8 @@ class MessageService
                     "unread" => true,
                     "is_sent_by_me" => false,
                     "type" => "2",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 5,
                 ],
             ],
             "groups" => [
@@ -84,10 +87,23 @@ class MessageService
                     "unread" => true,
                     "is_sent_by_me" => false,
                     "type" => "2",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 5,
                 ],
             ],
             "unreads" => [
+                [
+                    "id" => 1,
+                    "name" => "Sarah Miller",
+                    "avatar" => asset('images/kinshuk.jpg'),
+                    "message" => "Can we review the Q4 results later?",
+                    "time" => "10:30 AM",
+                    "unread" => true,
+                    "is_sent_by_me" => false,
+                    "type" => "1",
+                    "is_seen" => 0,
+                    "total_unread_messages" => 7,
+                ],
                 [
                     "id" => 2,
                     "name" => "David Anderson",
@@ -97,18 +113,8 @@ class MessageService
                     "unread" => false,
                     "is_sent_by_me" => false,
                     "type" => "1",
-                    "is_seen" => 0
-                ],
-                [
-                    "id" => 4,
-                    "name" => "Emily Chen",
-                    "avatar" => asset('images/kinshuk.jpg'),
-                    "message" => "Liked the design 😃😃.",
-                    "time" => "Oct 23",
-                    "unread" => false,
-                    "is_sent_by_me" => true,
-                    "type" => "1",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 1,
                 ],
                 [
                     "id" => 4,
@@ -120,7 +126,8 @@ class MessageService
                     "unread" => true,
                     "is_sent_by_me" => false,
                     "type" => "2",
-                    "is_seen" => 0
+                    "is_seen" => 0,
+                    "total_unread_messages" => 5,
                 ],
             ]
         ];

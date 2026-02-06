@@ -59,53 +59,63 @@
         </div>
     </div>
     <div class="flex-1 overflow-y-auto no-scrollbar">
-            <div class="all_messages ">
-                @foreach($messages["all_messages"] as $message)
-                    <div class="flex items-center gap-4 bg-primary/10 dark:bg-[#233648] px-5 min-h-[80px] py-3 cursor-pointer border-l-4 border-primary">
-                        <div class="relative">
-                            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Sarah Miller" style='background-image: url({{$message->avatar}});'></div>
-                            <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
+        <div class="all_messages ">
+            @foreach($messages["all_messages"] as $message)
+                <div class="flex items-center gap-4 bg-primary/10 dark:bg-[#233648] px-5 min-h-[80px] py-3 cursor-pointer border-l-4 border-primary">
+                    <div class="relative">
+                        <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Sarah Miller" style='background-image: url({{$message->avatar}});'></div>
+                        <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
+                    </div>
+                    <div class="flex flex-col justify-center flex-1 min-w-0">
+                        <div class="flex justify-between items-center mb-0.5">
+                            <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">{{$message->name}}</p>
+                            <p class="text-primary text-[11px] font-medium">{{$message->time}}</p>
                         </div>
-                        <div class="flex flex-col justify-center flex-1 min-w-0">
-                            <div class="flex justify-between items-center mb-0.5">
-                                <p class="text-slate-900 dark:text-white text-sm font-semibold truncate">{{$message->name}}</p>
-                                <p class="text-primary text-[11px] font-medium">{{$message->time}}</p>
+                        @if($message->type == 1)
+                            <div class="flex items-center gap-2 min-w-0">
+                                @if($message->is_sent_by_me)
+                                    @if($message->is_seen)
+                                        <span class="material-symbols-outlined text-[14px] text-primary shrink-0">
+                                            done_all
+                                        </span>
+                                    @else
+                                        <span class="material-symbols-outlined text-[14px] text-slate-400 shrink-0">
+                                            done_all
+                                        </span>
+                                    @endif
+                                @endif
+                                <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1 flex-1">
+                                    {{ $message->message }}
+                                </p>
+                                @if(@$message->unread)
+                                    <div
+                                        class="min-w-[20px] h-[20px] px-1 rounded-full bg-primary
+                                            flex items-center justify-center shrink-0">
+                                        <span class="text-[10px] leading-none text-white font-semibold">
+                                            {{ $message->total_unread_messages }}
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
-                            @if($message->type == 1)
-                                <div class="flex items-center gap-2 min-w-0">
-                                    @if($message->is_sent_by_me)
-                                        @if($message->is_seen)
-                                            <span class="material-symbols-outlined text-[14px] text-primary shrink-0">
-                                                done_all
-                                            </span>
-                                        @else
-                                            <span class="material-symbols-outlined text-[14px] text-slate-400 shrink-0">
-                                                done_all
-                                            </span>
-                                        @endif
-                                    @endif
-                                    <p class="text-slate-500 dark:text-[#92adc9] text-xs line-clamp-1 flex-1">
-                                        {{ $message->message }}
-                                    </p>
-                                    @if(@$message->unread)
-                                        <div
-                                            class="min-w-[20px] h-[20px] px-1 rounded-full bg-primary
-                                                flex items-center justify-center shrink-0">
-                                            <span class="text-[10px] leading-none text-white font-semibold">
-                                                10
-                                            </span>
-                                        </div>
-                                    @endif
-                                </div>
-                            @else
-                                <p class="text-slate-500 dark:text-[#92adc9] text-xs font-medium line-clamp-1">
+                        @else
+                            <div class="flex items-center gap-2 min-w-0">
+                                <p class="text-slate-500 dark:text-[#92adc9] text-xs font-medium line-clamp-1 flex-1">
                                     <span class="text-primary">{{ $message->last_message_user_name }}:</span> {{ $message->message }}
                                 </p>
-                            @endif
-                        </div>
+                                @if(@$message->unread)
+                                    <div
+                                        class="min-w-[20px] h-[20px] px-1 rounded-full bg-primary
+                                            flex items-center justify-center shrink-0">
+                                        <span class="text-[10px] leading-none text-white font-semibold">
+                                            {{ $message->total_unread_messages }}
+                                        </span>
+                                    </div>
+                                @endif
+                            </div>
+                        @endif
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </section>

@@ -7,7 +7,7 @@ use App\Http\Controllers\TestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('home.index'));
 });
 
 Route::controller(AuthController::class)->prefix('auth')->as('auth.')->group(function () {
