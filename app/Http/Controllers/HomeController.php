@@ -15,6 +15,7 @@ class HomeController extends Controller
 
     public function index() {
         $messages = $this->messageService->getInitMessages();
-        return view('socket.home', compact('messages'));
+        $active_page  = "single-discussion";
+        return view('socket.home', compact('messages', 'active_page'));
     }
 }
