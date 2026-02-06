@@ -2,6 +2,12 @@ import angular from 'angular';
 import { route } from 'ziggy-js';
 import { Ziggy } from './ziggy';
 const app = angular.module('nodeProjectApp', []);
+
+const getCsrfToken = () => {
+    const meta = document.querySelector('meta[name="csrf-token"]');
+    return meta?.getAttribute('content') ?? window.nodeProjectConfig?.csrfToken;
+};
+
 app.config(function($interpolateProvider) {
     $interpolateProvider.startSymbol('<%');
     $interpolateProvider.endSymbol('%>');
@@ -17,21 +23,27 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
     $scope.chat_type = 'personal';  
     $scope.active_inbox_id = '';
     $scope.inbox = {
-        'user_name': '',
-        'user_id': '',
-        'user_avatar': '',
+        'name': '',
+        'id': '',
+        'avatar': '',
         'messages': [],
         'type': '',
     }
+    $scope.user_id = 1;
+    $scope.user_name = "Kinshuk";
+    $scope.user_avatar = "https://randomuser.me/api/portraits/men/12.jpg";
 
     $scope.init = function() {
-        var url = route('home.index', {}, false, Ziggy);
+        const url = route('back-end.home.initData', {}, false, Ziggy);
         $http({
 			url: url,
 			ignoreLoadingBar: true,
 			method: "POST",
 			timeout: 30000,
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"X-CSRF-TOKEN": getCsrfToken(),
+			},
 		}).then(
         function(response) {
             console.log(response.data);
@@ -61,28 +73,31 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         $scope.is_default_screen = 0;
         $scope.active_inbox_id = message.inbox_id;
 
+        const inboxUserId = message.user_id ?? message.id;
         $scope.inbox = {
             'name': message.name,
-            'id': message.user_id,
+            'id': inboxUserId,
             'avatar': message.avatar,
             'type': message.type == 2 ? 'groups' : 'personal',
         }
-        var url = route('home.inboxData', {}, false, Ziggy);
-
+        const url = route('back-end.home.inboxData', {}, false, Ziggy);
+        const payload = new URLSearchParams();
+        payload.append('user_id', inboxUserId);
+        payload.append('type', message.type ?? '1');
         $http({
 			url: url,
 			ignoreLoadingBar: true,
 			method: "POST",
 			timeout: 30000,
-			headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            data: payload.toString(),
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"X-CSRF-TOKEN": getCsrfToken(),
+			},
 		}).then(
         function(response) {
-            console.log(response.data);
             const payload = response.data?.data ?? {};
-            $scope.all_messages = payload.messages?.all_messages ?? [];
-            $scope.groups = payload.messages?.groups ?? [];
-            $scope.unreads = payload.messages?.unreads ?? [];
-            $scope.inbox_messages = $scope.all_messages;
+            $scope.inbox.messages = payload.messages ?? [];
         }, function (error) {
             console.error(error);
         })
