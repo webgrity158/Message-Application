@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>
+        window.nodeProjectConfig = {
+            csrfToken: @json(csrf_token()),
+            genericErrorMessage: @json(__('Failed to initialize the chat. Please try again.')),
+        };
+    </script>
 
     {{-- Global Vite assets --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -44,7 +51,12 @@
             },
         }
     </script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
     <style>
+        [ng-cloak] { display: none !important; }
         body { font-family: 'Inter', sans-serif; }
         .material-symbols-outlined { font-size: 24px; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
