@@ -25,4 +25,19 @@ class HomeController extends Controller
             ]
         ], 200);
     }
+
+    public function inboxData(Request $request) {
+        $request->validate([
+            'user_id' => 'required|integer|exists:users',
+            'type' => 'required|in:1,2',
+        ]);
+        $messages = $this->messageService->getInboxMessages($request);
+        return response()->json([
+            'success' => 1,
+            'message' => 'success',
+            'data' => [
+                'messages' => $messages,
+            ]
+        ], 200);
+    }
 }

@@ -9,4 +9,6 @@ Route::controller(AuthController::class)->prefix('auth')->as('auth.')->group(fun
 
 Route::controller(HomeController::class)->prefix('home')->as('home.')->group(function () {
     Route::post('/', 'initData')->name('initData');
+    Route::post('/inbox', 'inboxData')->name('inboxData');
+
 });

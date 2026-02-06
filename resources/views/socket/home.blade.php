@@ -4,7 +4,8 @@
     <div ng-app="nodeProjectApp" ng-controller="SocketHomeController" ng-init='init()' class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-white antialiased overflow-hidden h-screen">
         <div class="flex h-full w-full overflow-hidden">
             <x-sidebar />
-            <!-- <x-default-welcome-screen /> -->
+            <x-default-welcome-screen ng-if="is_default_screen" />
+            <x-chat-area ng-show="!is_default_screen" />
         </div>
     </div>
 @endsection

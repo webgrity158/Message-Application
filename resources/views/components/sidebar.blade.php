@@ -18,10 +18,6 @@
             <span class="material-symbols-outlined">call</span>
             <span class="text-[10px] font-medium">Calls</span>
         </div>
-        <div class="flex flex-col items-center gap-1 group cursor-pointer text-slate-500 dark:text-[#92adc9] hover:text-primary transition-colors">
-            <span class="material-symbols-outlined">grid_view</span>
-            <span class="text-[10px] font-medium">Apps</span>
-        </div>
     </nav>
     <div class="flex flex-col items-center gap-6">
         <div class="text-slate-500 dark:text-[#92adc9] hover:text-primary cursor-pointer transition-colors">
@@ -47,20 +43,20 @@
     </div>
     <div class="pb-3 px-1">
         <div class="flex border-b border-slate-100 dark:border-[#324d67] px-4 gap-8">
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-primary text-slate-900 dark:text-white pb-[13px] pt-2" href="#">
+            <a ng-model="active_page" ng-click="changePage('all')" ng-class="active_page == 'all' ? 'border-b-primary border-b-[3px] text-slate-900 dark:text-white' : 'text-slate-400 dark:text-[#92adc9]'" class="flex flex-col items-center justify-center  pb-[13px] pt-2" href="#">
                 <p class="text-xs font-bold leading-normal tracking-wide">ALL</p>
             </a>
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-400 dark:text-[#92adc9] pb-[13px] pt-2" href="#">
+            <a ng-model="active_page" ng-click="changePage('unreads')" ng-class="active_page == 'unreads' ? 'border-b-primary border-b-[3px] text-slate-900 dark:text-white' : 'text-slate-400 dark:text-[#92adc9]'" class="flex flex-col items-center justify-center pb-[13px] pt-2" href="#">
                 <p class="text-xs font-bold leading-normal tracking-wide">UNREAD</p>
             </a>
-            <a class="flex flex-col items-center justify-center border-b-[3px] border-b-transparent text-slate-400 dark:text-[#92adc9] pb-[13px] pt-2" href="#">
+            <a ng-model="active_page" ng-click="changePage('groups')" ng-class="active_page == 'groups' ? 'border-b-primary border-b-[3px] text-slate-900 dark:text-white' : 'text-slate-400 dark:text-[#92adc9]'" class="flex flex-col items-center justify-center pb-[13px] pt-2" href="#">
                 <p class="text-xs font-bold leading-normal tracking-wide">GROUPS</p>
             </a>
         </div>
     </div>
     <div class="flex-1 overflow-y-auto no-scrollbar">
         <div class="all_messages ">
-            <div class="flex items-center gap-4 bg-primary/10 dark:bg-[#233648] px-5 min-h-[80px] py-3 cursor-pointer border-l-4 border-primary" ng-repeat="message in messages.all_messages">
+            <div ng-click="openInbox(message)" ng-class="{'border-l-4 border-primary bg-primary/10 dark:bg-[#233648]' : message.inbox_id == active_inbox_id}" class="flex items-center gap-4   px-5 min-h-[80px] py-3 cursor-pointer " ng-repeat="message in inbox_messages">
                 <div class="relative">
                     <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full h-12 w-12" data-alt="Portrait of Sarah Miller" style='background-image: url(<%message.avatar%>)'></div>
                     <div class="absolute bottom-0 right-0 size-3 rounded-full bg-green-500 ring-2 ring-white dark:ring-[#111a22]"></div>
