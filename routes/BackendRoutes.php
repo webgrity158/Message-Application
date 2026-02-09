@@ -2,12 +2,15 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PresenceController;
 
 Route::controller(AuthController::class)->prefix('auth')->as('auth.')->group(function () {
     Route::get('/login', 'login')->name('login');
     Route::post('/login', 'authenticate')->name('authenticate');
     Route::post('/register', 'register')->name('register');
 });
+
+Route::get('/presence/user/{user}', [PresenceController::class, 'status'])->name('presence.userStatus');
 
 Route::controller(HomeController::class)->prefix('home')->as('home.')->group(function () {
     Route::post('/', 'initData')->name('initData');

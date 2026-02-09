@@ -2,6 +2,7 @@ const baseRoutes = {
   "back-end.auth.login": { "uri": "auth/login", "methods": ["GET", "HEAD"] },
   "back-end.auth.authenticate": { "uri": "auth/login", "methods": ["POST"] },
   "back-end.auth.register": { "uri": "auth/register", "methods": ["POST"] },
+  "back-end.presence.userStatus": { "uri": "presence/user/{user}", "methods": ["GET"] },
   "front-end.home": { "uri": "home", "methods": ["GET", "HEAD"] },
   "back-end.home.initData": { "uri": "home", "methods": ["POST"] },
   "back-end.home.inboxData": { "uri": "home/inbox", "methods": ["POST"] },

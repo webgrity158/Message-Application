@@ -16,6 +16,7 @@ const io = new Server(3000, {
 });
 
 const redis = new Redis();
+const ONLINE_USERS_KEY = "presence:users";
 
 redis.psubscribe("*", (err, count) => {
     console.log("Subscribed to Redis");
@@ -28,10 +29,43 @@ redis.on("pmessage", (pattern, channel, message) => {
     }
 });
 
+io.use((socket, next) => {
+    const userId = socket.handshake?.auth?.userId;
+    if (!userId) {
+        console.warn("Socket connection rejected — missing userId");
+        return next(new Error("USER_ID_REQUIRED"));
+    }
+
+    socket.userId = userId?.toString?.() ?? `${userId}`;
+    if (!socket.userId) {
+        return next(new Error("USER_ID_REQUIRED"));
+    }
+
+    next();
+});
+
+const trackUserConnected = (userId) => {
+    return redis.hincrby(ONLINE_USERS_KEY, userId, 1);
+};
+
+const trackUserDisconnected = async (userId) => {
+    const remaining = await redis.hincrby(ONLINE_USERS_KEY, userId, -1);
+    if (remaining <= 0) {
+        await redis.hdel(ONLINE_USERS_KEY, userId);
+    }
+};
+
 io.on("connection", (socket) => {
     console.log("Client connected:", socket.id);
+    trackUserConnected(socket.userId).catch((error) => {
+        console.error("Failed to mark user online:", error);
+    });
+
     socket.on("disconnect", () => {
         console.log("Client disconnected");
+        trackUserDisconnected(socket.userId).catch((error) => {
+            console.error("Failed to mark user offline:", error);
+        });
     });
 });
 

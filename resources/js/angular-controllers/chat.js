@@ -27,11 +27,59 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         'avatar': '',
         'messages': [],
         'type': '',
+        'is_online': false,
     }
+    $scope.presenceStatus = {};
+    const presenceRequests = {};
     $scope.user_id = window.authUser?.id ?? 0;
     $scope.user_name = window.authUser?.name ?? "dummy";
     $scope.user_avatar = window.authUser?.avatar ?? "https://cdn-icons-png.flaticon.com/512/3177/3177440.png ";
     $scope.is_new_chat_window_active = 0;
+
+    const fetchPresenceStatus = (userId) => {
+        if (!userId) {
+            return Promise.resolve(false);
+        }
+
+        if ($scope.presenceStatus[userId] !== undefined) {
+            return Promise.resolve($scope.presenceStatus[userId]);
+        }
+
+        if (presenceRequests[userId]) {
+            return presenceRequests[userId];
+        }
+
+        const url = route('back-end.presence.userStatus', { user: userId }, false, Ziggy);
+
+        presenceRequests[userId] = $http({
+            url,
+            method: 'GET',
+            headers: {
+                'X-CSRF-TOKEN': getCsrfToken(),
+                'Accept': 'application/json',
+            },
+        }).then(
+            function(response) {
+                console.log(response);
+                const online = Boolean(response.data?.data?.online);
+                $scope.presenceStatus[userId] = online;
+                return online;
+            },
+            function(error) {
+                console.error(error);
+                $scope.presenceStatus[userId] = false;
+                return false;
+            }
+        ).finally(function() {
+            delete presenceRequests[userId];
+        });
+
+        return presenceRequests[userId];
+    };
+
+    $scope.isUserOnline = function(userId) {
+        return $scope.presenceStatus[userId] ?? false;
+    };
 
     $scope.init = function() {
         const url = route('back-end.home.initData', {}, false, Ziggy);
@@ -78,13 +126,18 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
             'id': inboxUserId,
             'avatar': message.avatar,
             'type': message.type == 2 ? 'groups' : 'personal',
+            'is_online': false,
         }
         const url = route('back-end.home.inboxData', {}, false, Ziggy);
         const payload = new URLSearchParams();
         payload.append('user_id', inboxUserId);
         payload.append('type', message.type ?? '1');
+        fetchPresenceStatus(inboxUserId).then(function (online) {
+            $scope.inbox.is_online = online;
+        });
+
         $http({
-			url: url,
+            url: url,
 			ignoreLoadingBar: true,
 			method: "POST",
 			timeout: 30000,
