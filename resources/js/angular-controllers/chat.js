@@ -1,7 +1,6 @@
-import angular from 'angular';
+import { nodeProjectApp as app } from './module';
 import { route } from 'ziggy-js';
-import { Ziggy } from './ziggy';
-const app = angular.module('nodeProjectApp', []);
+import { Ziggy } from '../ziggy';
 
 const getCsrfToken = () => {
     const meta = document.querySelector('meta[name="csrf-token"]');
@@ -32,6 +31,7 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
     $scope.user_id = 1;
     $scope.user_name = "Kinshuk";
     $scope.user_avatar = "https://randomuser.me/api/portraits/men/12.jpg";
+    $scope.is_new_chat_window_active = 0;
 
     $scope.init = function() {
         const url = route('back-end.home.initData', {}, false, Ziggy);
@@ -101,6 +101,11 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         }, function (error) {
             console.error(error);
         })
+    }
+
+    $scope.toggleNewChatWindow = function() {
+        console.log("Toggle New Chat Window");
+        $scope.is_new_chat_window_active = !$scope.is_new_chat_window_active;
     }
 
 }]);

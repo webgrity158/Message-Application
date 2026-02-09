@@ -7,8 +7,8 @@ const io = new Server(3000, {
             "http://localhost",
             "http://localhost:8000",
             "http://127.0.0.1:8000",
-            "http://192.168.0.215:8000",
-            "http://192.168.0.215:3000"
+            "http://192.168.0.202:8000",
+            "http://192.168.0.202:3000"
         ],
         methods: ["GET", "POST"],
         credentials: true,

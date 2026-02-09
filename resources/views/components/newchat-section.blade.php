@@ -4,7 +4,7 @@
             <h2 class="text-xl font-bold">New Chat</h2>
             <p class="text-sm text-slate-500 dark:text-[#92adc9]">Connect with colleagues and friends</p>
         </div>
-        <button class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
+        <button ng-click="toggleNewChatWindow()" class="p-2 text-slate-400 hover:text-slate-600 dark:hover:text-white transition-colors">
             <span class="material-symbols-outlined">close</span>
         </button>
     </div>
@@ -21,18 +21,18 @@
             />
         </div>
 
-        <div class="flex items-center justify-between">
+        <label class="flex items-center justify-between w-full gap-3 cursor-pointer">
             <div class="flex items-center gap-2">
                 <span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1">group_add</span>
                 <span class="text-sm font-semibold">Create a Group</span>
             </div>
-            <label class="relative inline-flex items-center cursor-pointer">
+            <div class="flex items-center">
                 <input class="sr-only peer" type="checkbox" value="" />
-                <div
-                    class="w-11 h-6 bg-slate-200 dark:bg-[#233648] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary">
-                </div>
-            </label>
-        </div>
+                <span
+                    class="relative inline-flex w-11 h-6 rounded-full bg-slate-200 dark:bg-[#233648] transition-colors duration-200 ease-in-out peer-focus-visible:outline-none peer-focus-visible:ring-2 peer-focus-visible:ring-primary/70 peer-checked:bg-primary after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:h-5 after:w-5 after:bg-white after:border after:border-gray-300 after:rounded-full after:shadow-lg after:transition-all peer-checked:after:translate-x-full peer-checked:after:border-white">
+                </span>
+            </div>
+        </label>
     </div>
 
     <div class="flex-1 overflow-y-auto px-2 pb-4 no-scrollbar">

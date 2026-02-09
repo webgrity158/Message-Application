@@ -1,5 +1,7 @@
 const baseRoutes = {
   "back-end.auth.login": { "uri": "auth/login", "methods": ["GET", "HEAD"] },
+  "back-end.auth.authenticate": { "uri": "auth/login", "methods": ["POST"] },
+  "back-end.auth.register": { "uri": "auth/register", "methods": ["POST"] },
   "front-end.home": { "uri": "home", "methods": ["GET", "HEAD"] },
   "back-end.home.initData": { "uri": "home", "methods": ["POST"] },
   "back-end.home.inboxData": { "uri": "home/inbox", "methods": ["POST"] },
@@ -12,7 +14,7 @@ const baseRoutes = {
 };
 
 const Ziggy = {
-  url: "http://192.168.0.215:8000",
+  url: "http://192.168.0.202:8000",
   port: 8000,
   defaults: {},
   routes: { ...baseRoutes },

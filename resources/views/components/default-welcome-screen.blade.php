@@ -16,11 +16,11 @@
 
         <!-- Action Buttons -->
         <div class="flex flex-col sm:flex-row gap-4 w-full justify-center">
-            <button class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-lg shadow-primary/20">
+            <button ng-click="toggleNewChatWindow()" class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white font-semibold py-3 px-8 rounded-xl transition-all shadow-lg shadow-primary/20">
                 <span class="material-symbols-outlined">add_comment</span>
                 Start New Chat
             </button>
-            <button class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold py-3 px-8 rounded-xl transition-all">
+            <button ng-click="toggleNewChatWindow()" class="flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-semibold py-3 px-8 rounded-xl transition-all">
                 <span class="material-symbols-outlined">person_search</span>
                 View Contacts
             </button>
@@ -67,10 +67,10 @@
 
         <!-- Action Buttons -->
         <div class="flex gap-4">
-            <button class="bg-white dark:bg-[#233648] hover:bg-slate-100 dark:hover:bg-[#2d465c] text-slate-900 dark:text-white font-semibold py-2.5 px-6 rounded-xl border border-slate-200 dark:border-transparent transition-all shadow-sm">
+            <button ng-click="toggleNewChatWindow()" class="bg-white dark:bg-[#233648] hover:bg-slate-100 dark:hover:bg-[#2d465c] text-slate-900 dark:text-white font-semibold py-2.5 px-6 rounded-xl border border-slate-200 dark:border-transparent transition-all shadow-sm">
                 View Contacts
             </button>
-            <button class="bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20">
+            <button ng-click="toggleNewChatWindow()" class="bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-6 rounded-xl transition-all shadow-md shadow-primary/20">
                 Create New Group
             </button>
         </div>

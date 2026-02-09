@@ -1,7 +1,7 @@
 <!-- Leftmost Workspace Nav -->
 <aside class="w-20 flex flex-col items-center py-6 bg-slate-100 dark:bg-[#111a22] border-r border-slate-200 dark:border-[#233648] shrink-0">
     <div class="mb-8">
-        <div class="bg-primary size-12 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
+        <div ng-click="toggleNewChatWindow()" style="cursor:pointer;" class="bg-primary size-12 rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/20">
             <span class="material-symbols-outlined font-bold">chat_bubble</span>
         </div>
     </div>
