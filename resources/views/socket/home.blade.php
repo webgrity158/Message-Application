@@ -17,3 +17,8 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+<script>
+    window.authUser = @json(auth()->user());
+</script>
+@endpush

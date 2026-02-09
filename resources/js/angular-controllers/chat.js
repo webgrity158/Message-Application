@@ -28,9 +28,9 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         'messages': [],
         'type': '',
     }
-    $scope.user_id = 1;
-    $scope.user_name = "Kinshuk";
-    $scope.user_avatar = "https://randomuser.me/api/portraits/men/12.jpg";
+    $scope.user_id = window.authUser?.id ?? 0;
+    $scope.user_name = window.authUser?.name ?? "dummy";
+    $scope.user_avatar = window.authUser?.avatar ?? "https://cdn-icons-png.flaticon.com/512/3177/3177440.png ";
     $scope.is_new_chat_window_active = 0;
 
     $scope.init = function() {
@@ -46,7 +46,6 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
 			},
 		}).then(
         function(response) {
-            console.log(response.data);
             const payload = response.data?.data ?? {};
             $scope.all_messages = payload.messages?.all_messages ?? [];
             $scope.groups = payload.messages?.groups ?? [];
