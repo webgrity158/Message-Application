@@ -24,5 +24,6 @@ class UserInbox extends Model
     public function group() {
         return $this->belongsTo(Groups::class, 'group_id');
     }
+    
 
 }

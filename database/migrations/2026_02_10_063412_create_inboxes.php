@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_inbox', function (Blueprint $table) {
+        Schema::create('inboxes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('inboxof_user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreignId('message_id')->constrained('messages')->cascadeOnUpdate()->cascadeOnDelete();
             $table->enum('is_group', ['0', '1'])->default('0');
             $table->foreignId('group_id')->constrained('groups')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_inbox');
+        Schema::dropIfExists('inboxes');
     }
 };

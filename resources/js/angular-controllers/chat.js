@@ -116,23 +116,22 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         }
     };
 
-    $scope.openInbox = function(message) {
-        $scope.chat_type = message.type == 2 ? 'groups' : 'personal';
+    $scope.openInbox = function(inbox) {
+        $scope.chat_type = inbox.type == 2 ? 'groups' : 'personal';
         $scope.is_default_screen = 0;
-        $scope.active_inbox_id = message.inbox_id;
+        $scope.active_inbox_id = inbox.inbox_id;
 
-        const inboxUserId = message.user_id ?? message.id;
+        const inboxUserId = inbox.user_id ?? inbox.id;
         $scope.inbox = {
-            'name': message.name,
+            'name': inbox.name,
             'id': inboxUserId,
-            'avatar': message.avatar,
-            'type': message.type == 2 ? 'groups' : 'personal',
+            'avatar': inbox.avatar,
+            'type': inbox.type == 2 ? 'groups' : 'personal',
             'is_online': false,
         }
         const url = route('back-end.home.inboxData', {}, false, Ziggy);
         const payload = new URLSearchParams();
-        payload.append('user_id', inboxUserId);
-        payload.append('type', message.type ?? '1');
+        payload.append('inbox_id', inbox.id);
         fetchPresenceStatus(inboxUserId).then(function (online) {
             $scope.inbox.is_online = online;
         });
@@ -149,6 +148,7 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
 			},
 		}).then(
         function(response) {
+            console.log(response.data)
             const payload = response.data?.data ?? {};
             $scope.inbox.messages = payload.messages ?? [];
         }, function (error) {

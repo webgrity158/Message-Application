@@ -18,7 +18,6 @@ class MessageService
     public function getInitMessages()
     {
         $get_inbox_data = UserInbox::with(['user', 'messages', 'group'])->where('inboxof_user_id', auth()->user()->id)->get();
-        
         foreach($get_inbox_data as $value) {
             $return_data["all_messages"][] = [
                 "inbox_id" => $value->id,
@@ -94,39 +93,18 @@ class MessageService
         return $date->format('M, d, Y'); // e.g. Oct, 23, 2026
     }
 
-    public function getInboxMessages($request) {
-        $user_id = $request->input('user_id');
-        $type = $request->input('type');
-        $messages = [
-            [
-                "message_id" => 1,
-                "message" => "Hi Alex! I've been going through the Q4 projection reports. There are a few discrepancies in the marketing budget section.",
-                "time" => "10:28 AM",
-                "sent_by" => 1,
-                "is_seen" => 1,
-            ],
-            [
-                "message_id" => 2,
-                "message" => "Can we review the Q4 results later? I'm free after 2 PM today.",
-                "time" => "10:30 AM",
-                "sent_by" => 2,
-                "is_seen" => 1,
-            ],
-            [
-                "message_id" => 3,
-                "message" => "The design meeting has been rescheduled to next week.",
-                "time" => "12:30 PM",
-                "sent_by" => 2,
-                "is_seen" => 1,
-            ],
-            [
-                "message_id" => 4,
-                "message" => "I'll send the updated Q4 results by email.",
-                "time" => "02:30 PM",
-                "sent_by" => 1,
-                "is_seen" => 0,
-            ],
-        ];
+    public function getInboxMessages($inbox_id) {
+        $get_inbox_data = UserInbox::with(['user', 'messages', 'group'])->where('id', $inbox_id)->first();
+        foreach($get_inbox_data->messages as $message) {
+            $messages[] = [
+                "message_id" => $message->id,
+                "message" => $message->message, 
+                "time" => $this->formatMessageTime($message->created_at),
+                "sent_by" => $message->from_user_id == auth()->user()->id ? 1 : 2,
+                "is_seen" => $message->is_seen,
+            ];
+        }
+        
         return $messages;
     }
 
