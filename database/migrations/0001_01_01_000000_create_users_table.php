@@ -14,17 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('image')->nullable();
             $table->string('email')->unique();
+            $table->string('phone_number')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('otp')->nullable();
+            $table->timestamp('otp_sent_at')->nullable();
+            $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->string('password');
+            $table->string('google_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
-        });
-
-        Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
-            $table->timestamp('created_at')->nullable();
         });
 
         Schema::create('sessions', function (Blueprint $table) {

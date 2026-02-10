@@ -10,8 +10,23 @@ class PresenceController extends Controller
 {
     private const ONLINE_USERS_KEY = 'presence:users';
 
-    public function status(User $user): JsonResponse
+    public function status($userId): JsonResponse
     {
+        $user = User::find($userId);
+
+        if (!$user) {
+            return response()->json([
+                'success' => 1,
+                'message' => 'User not found; treating as offline.',
+                'data' => [
+                    'user_id' => $userId,
+                    'online' => false,
+                    'connections' => 0,
+                    'exists' => false,
+                ],
+            ]);
+        }
+
         $count = Redis::connection()->hget(self::ONLINE_USERS_KEY, $user->getKey()) ?? 0;
         $online = (int) $count > 0;
 
