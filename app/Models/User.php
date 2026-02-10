@@ -45,4 +45,26 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function messages() {
+        return $this->hasMany(Messages::class);
+    }
+
+    public function userInboxes() {
+        return $this->hasMany(UserInbox::class, 'user_id', 'id');
+    }
+
+    public function groups() {
+        return $this->belongsToMany(Groups::class);
+    }
+
+    public function getImageAttribute($value)
+    {
+        if (!empty($value) && file_exists(public_path($value))) {
+            return asset($value);
+        }
+
+        return asset('images/user.png');
+    }
+
 }

@@ -2,6 +2,9 @@
 
 namespace App\Services;
 
+use App\Models\UserInbox;
+use Carbon\Carbon;
+
 class MessageService
 {
     /**
@@ -14,138 +17,81 @@ class MessageService
 
     public function getInitMessages()
     {
-         $dummy_data = [
-            "all_messages" => [
-                [
-                    "inbox_id" => 1,
-                    "id" => 1,
-                    "name" => "Sarah Miller",
-                    "avatar" => "https://randomuser.me/api/portraits/women/44.jpg",
-                    "message" => "Can we review the Q4 results later?",
-                    "time" => "10:30 AM",
-                    "unread" => true,
-                    "is_sent_by_me" => false,
-                    "type" => "1",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 7,
-                ],
-                [
-                    "inbox_id" => 2,
-                    "id" => 2,
-                    "name" => "David Anderson",
-                    "avatar" => "https://randomuser.me/api/portraits/men/32.jpg",
-                    "message" => "New mockups are ready for review.",
-                    "time" => "Yesterday",
-                    "unread" => false,
-                    "is_sent_by_me" => true,
-                    "type" => "1",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 1,
-                ],
-                [
-                    "inbox_id" => 3,
-                    "id" => 3,
-                    "name" => "James Wilson",
-                    "avatar" => "https://randomuser.me/api/portraits/men/76.jpg",
-                    "message" => "Does 7 PM work for everyone this weekend?",
-                    "time" => "Oct 24",
-                    "unread" => false,
-                    "is_sent_by_me" => true,
-                    "type" => "1",
-                    "is_seen" => 1
-                ],
-                [
-                    "inbox_id" => 4,
-                    "id" => 4,
-                    "name" => "Emily Chen",
-                    "avatar" => "https://randomuser.me/api/portraits/women/65.jpg",
-                    "message" => "Liked the design 😃😃.",
-                    "time" => "Oct 23",
-                    "unread" => false,
-                    "is_sent_by_me" => true,
-                    "type" => "1",
-                    "is_seen" => 1,
-                    "total_unread_messages" => 0,
-                ],
-                [
-                    "inbox_id" => 5,
-                    "id" => 4,
-                    "name" => "Our Family",
-                    "avatar" => "https://images.unsplash.com/photo-1529156069898-49953e39b3ac",
-                    "last_message_user_name" => "Sarah Miller",
-                    "message" => "The design meeting has been rescheduled to next week.",
-                    "time" => "Oct 22",
-                    "unread" => true,
-                    "is_sent_by_me" => false,
-                    "type" => "2",
-                    "is_seen" => 1,
-                    "total_unread_messages" => 5,
-                ],
-            ],
-            "groups" => [
-                [
-                    "inbox_id" => 5,
-                    "id" => 4,
-                    "name" => "Our Family",
-                    "avatar" => "https://images.unsplash.com/photo-1529156069898-49953e39b3ac",
-                    "last_message_user_name" => "Sarah Miller",
-                    "message" => "The design meeting has been rescheduled to next week.",
-                    "time" => "Oct 22",
-                    "unread" => true,
-                    "is_sent_by_me" => false,
-                    "type" => "2",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 5,
-                ],
-            ],
-            "unreads" => [
-                [
-                    "inbox_id" => 1,
-                    "id" => 1,
-                    "name" => "Sarah Miller",
-                    "avatar" => "https://randomuser.me/api/portraits/women/44.jpg",
-                    "message" => "Can we review the Q4 results later?",
-                    "time" => "10:30 AM",
-                    "unread" => true,
-                    "is_sent_by_me" => false,
-                    "type" => "1",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 7,
-                ],
-                [
-                    "inbox_id" => 2,
-                    "id" => 2,
-                    "name" => "David Anderson",
-                    "avatar" => "https://randomuser.me/api/portraits/men/32.jpg",
-                    "message" => "New mockups are ready for review.",
-                    "time" => "Yesterday",
-                    "unread" => false,
-                    "is_sent_by_me" => false,
-                    "type" => "1",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 1,
-                ],
-                [
-                    "inbox_id" => 5,
-                    "id" => 4,
-                    "name" => "Our Family",
-                    "avatar" => "https://images.unsplash.com/photo-1529156069898-49953e39b3ac",
-                    "last_message_user_name" => "Sarah Miller",
-                    "message" => "The design meeting has been rescheduled to next week.",
-                    "time" => "Oct 22",
-                    "unread" => true,
-                    "is_sent_by_me" => false,
-                    "type" => "2",
-                    "is_seen" => 0,
-                    "total_unread_messages" => 5,
-                ],
-            ]
-        ];
+        $get_inbox_data = UserInbox::with(['user', 'messages', 'group'])->where('inboxof_user_id', auth()->user()->id)->get();
+        
+        foreach($get_inbox_data as $value) {
+            $return_data["all_messages"][] = [
+                "inbox_id" => $value->id,
+                "id" => $value->user->id,
+                "name" => $value->user->name,
+                "avatar" => $value->user->image,
+                "message" => $value->messages->message,
+                "time" => $this->formatMessageTime($value->messages->created_at),
+                "unread" => $value->is_seen == 0 ? true : false,
+                "is_sent_by_me" => $value->messages->from_user_id == auth()->user()->id ? true : false,
+                "type" => $value->is_group == 0 ? "1" : "2",
+                "is_seen" => $value->is_seen,
+                "total_unread_messages" => $value->total_unread_messages,
+            ];
+
+            if($value->is_group == 1) {
+                $return_data["groups"][] = [
+                    "inbox_id" => $value->id,
+                    "id" => $value->user->id,
+                    "name" => $value->user->name,
+                    "avatar" => $value->user->image,
+                    "message" => $value->messages->message,
+                    "time" => $this->formatMessageTime($value->messages->created_at),
+                    "unread" => $value->is_seen == 0 ? true : false,
+                    "is_sent_by_me" => $value->messages->from_user_id == auth()->user()->id ? true : false,
+                    "type" => $value->is_group == 0 ? "1" : "2",
+                    "is_seen" => $value->is_seen,
+                    "total_unread_messages" => $value->total_unread_messages,
+                ];
+            }
+
+            if($value->is_seen == 0) {
+                $return_data["unreads"][] = [
+                    "inbox_id" => $value->id,
+                    "id" => $value->user->id,
+                    "name" => $value->user->name,
+                    "avatar" => $value->user->image,
+                    "message" => $value->messages->message,
+                    "time" => $this->formatMessageTime($value->messages->created_at),
+                    "unread" => $value->is_seen == 0 ? true : false,
+                    "is_sent_by_me" => $value->messages->from_user_id == auth()->user()->id ? true : false,
+                    "type" => $value->is_group == 0 ? "1" : "2",
+                    "is_seen" => $value->is_seen,
+                    "total_unread_messages" => $value->total_unread_messages,
+                ];
+            }
+        }
+
         return [
-            "all_messages" => $this->itemsToObjects($dummy_data["all_messages"]),
-            "groups" => $this->itemsToObjects($dummy_data["groups"]),
-            "unreads" => $this->itemsToObjects($dummy_data["unreads"]),
+            "all_messages" => !empty($return_data["all_messages"]) ? $this->itemsToObjects($return_data["all_messages"]) : [],
+            "groups" => !empty($return_data["groups"]) ? $this->itemsToObjects($return_data["groups"]) : [],
+            "unreads" => !empty($return_data["unreads"]) ? $this->itemsToObjects($return_data["unreads"]) : [],
         ];
+    }
+
+    function formatMessageTime($createdAt)
+    {
+        $date = Carbon::parse($createdAt);
+        $now = Carbon::now();
+
+        if ($date->isToday()) {
+            return $date->format('h:i A'); // e.g. 03:45 PM
+        }
+
+        if ($date->isYesterday()) {
+            return 'Yesterday';
+        }
+
+        if ($date->year === $now->year) {
+            return $date->format('M, d'); // e.g. Oct, 23
+        }
+
+        return $date->format('M, d, Y'); // e.g. Oct, 23, 2026
     }
 
     public function getInboxMessages($request) {

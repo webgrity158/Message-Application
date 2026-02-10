@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('group_id')->constrained('groups')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
             $table->enum('is_attachment', ['0', '1'])->default('0');
             $table->enum('attachment_type', ['none', 'file', 'image', 'video'])->default('none');
+            $table->integer('total_unread_messages')->default(0);
             $table->timestamps();
         });
     }

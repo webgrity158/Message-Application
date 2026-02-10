@@ -94,6 +94,7 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
 			},
 		}).then(
         function(response) {
+            console.log(response.data); 
             const payload = response.data?.data ?? {};
             $scope.all_messages = payload.messages?.all_messages ?? [];
             $scope.groups = payload.messages?.groups ?? [];
