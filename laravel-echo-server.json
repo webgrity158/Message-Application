@@ -1,5 +1,5 @@
 {
-	"authHost": "http://192.168.0.202:8000",
+	"authHost": "http://192.168.0.94:8000",
 	"authEndpoint": "/broadcasting/auth",
 	"clients": [],
 	"database": "redis",
@@ -10,7 +10,7 @@
 		}
 	},
 	"devMode": true,
-	"host": "192.168.0.202",
+	"host": "192.168.0.94",
 	"port": "6001",
 	"protocol": "http",
 	"socketio": {},

@@ -6,7 +6,7 @@
             <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Header Avatar of Sarah Miller" style='background-image: url(<%inbox.avatar%>)'></div>
             <div>
                 <h3 class="text-base font-bold leading-tight"><%inbox.name%></h3>
-                <p class="text-xs text-green-500 font-medium">Online</p>
+                <p ng-show="inbox.is_online" class="text-xs text-green-500 font-medium">Online</p>
             </div>
         </div>
         <div class="flex items-center gap-4 text-slate-400 dark:text-[#92adc9]">

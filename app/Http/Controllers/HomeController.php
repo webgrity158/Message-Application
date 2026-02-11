@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function inboxData(Request $request) {
         $request->validate([
-            'inbox_id' => 'required|integer|exists:user_inbox,id',
+            'inbox_id' => 'required|integer|exists:inbox_users,id',
         ]);
         $messages = $this->messageService->getInboxMessages($request->inbox_id);
         return response()->json([

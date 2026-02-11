@@ -6,6 +6,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class User extends Authenticatable
 {
@@ -46,16 +48,30 @@ class User extends Authenticatable
         ];
     }
 
-    public function messages() {
-        return $this->hasMany(Messages::class);
+    public function messages(): HasMany
+    {
+        return $this->hasMany(Messages::class, 'from_user_id');
     }
 
-    public function userInboxes() {
-        return $this->hasMany(UserInbox::class, 'user_id', 'id');
+    public function receivedMessages(): HasMany
+    {
+        return $this->hasMany(Messages::class, 'to_user_id');
     }
 
-    public function groups() {
-        return $this->belongsToMany(Groups::class);
+    public function inboxUsers(): HasMany
+    {
+        return $this->hasMany(InboxUser::class, 'user_id', 'id');
+    }
+
+    public function inboxes(): BelongsToMany
+    {
+        return $this->belongsToMany(Inbox::class, 'inbox_users', 'user_id', 'inbox_id')
+            ->withTimestamps();
+    }
+
+    public function groups(): BelongsToMany
+    {
+        return $this->belongsToMany(Groups::class, 'groups_users', 'user_id', 'group_id');
     }
 
     public function getImageAttribute($value)

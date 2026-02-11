@@ -7,8 +7,8 @@ const io = new Server(3000, {
             "http://localhost",
             "http://localhost:8000",
             "http://127.0.0.1:8000",
-            "http://192.168.0.202:8000",
-            "http://192.168.0.202:3000"
+            "http://192.168.0.94:8000",
+            "http://192.168.0.94:3000"
         ],
         methods: ["GET", "POST"],
         credentials: true,
@@ -16,13 +16,14 @@ const io = new Server(3000, {
 });
 
 const redis = new Redis();
+const subscriber = new Redis();
 const ONLINE_USERS_KEY = "presence:users";
 
-redis.psubscribe("*", (err, count) => {
+subscriber.psubscribe("*", (err, count) => {
     console.log("Subscribed to Redis");
 });
 
-redis.on("pmessage", (pattern, channel, message) => {
+subscriber.on("pmessage", (pattern, channel, message) => {
     const data = JSON.parse(message);
     if (data.event === "message.sent") {
         io.emit("message", data.data.message);

@@ -15,7 +15,7 @@ const baseRoutes = {
 };
 
 const Ziggy = {
-  url: "http://192.168.0.202:8000",
+  url: "http://192.168.0.94:8000",
   port: 8000,
   defaults: {},
   routes: { ...baseRoutes },

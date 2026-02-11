@@ -131,8 +131,9 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         }
         const url = route('back-end.home.inboxData', {}, false, Ziggy);
         const payload = new URLSearchParams();
-        payload.append('inbox_id', inbox.id);
+        payload.append('inbox_id', inbox.inbox_id);
         fetchPresenceStatus(inboxUserId).then(function (online) {
+            console.log('presence', online)
             $scope.inbox.is_online = online;
         });
 

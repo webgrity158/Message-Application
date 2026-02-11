@@ -7,7 +7,7 @@ import { io } from 'socket.io-client';
 const isAuthenticated = Boolean(window.authUser?.id);
 
 if (isAuthenticated) {
-    const socket = io("http://192.168.0.202:3000", {
+    const socket = io("http://192.168.0.94:3000", {
         auth: {
             userId: window.authUser.id,
         },
