@@ -35,6 +35,7 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
     $scope.user_name = window.authUser?.name ?? "dummy";
     $scope.user_avatar = window.authUser?.avatar ?? "https://cdn-icons-png.flaticon.com/512/3177/3177440.png ";
     $scope.is_new_chat_window_active = 0;
+    $scope.form = { message: '' };
 
     const fetchPresenceStatus = (userId) => {
         if (!userId) {
@@ -149,9 +150,9 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
 			},
 		}).then(
         function(response) {
-            console.log(response.data)
+        console.log(response.data)
             const payload = response.data?.data ?? {};
-            $scope.inbox.messages = payload.messages ?? [];
+            $scope.inbox.messages = payload.messages ?? {};
         }, function (error) {
             console.error(error);
         })
@@ -161,6 +162,84 @@ app.controller('SocketHomeController', ['$scope', '$rootScope', '$http', '$timeo
         console.log("Toggle New Chat Window");
         $scope.is_new_chat_window_active = !$scope.is_new_chat_window_active;
     }
+
+    const getMessageGroupKey = (isoString) => {
+        if (!isoString) {
+            return 'Today';
+        }
+
+        const parsedDate = new Date(isoString);
+        if (Number.isNaN(parsedDate.getTime())) {
+            return 'Today';
+        }
+
+        const today = new Date();
+        const yesterday = new Date();
+        yesterday.setDate(yesterday.getDate() - 1);
+
+        if (parsedDate.toDateString() === today.toDateString()) {
+            return 'Today';
+        }
+
+        if (parsedDate.toDateString() === yesterday.toDateString()) {
+            return 'Yesterday';
+        }
+
+        return parsedDate.toISOString().split('T')[0];
+    };
+
+    const insertMessageIntoInbox = (message) => {
+        if (!message) {
+            return;
+        }
+
+        if (!$scope.inbox.messages || typeof $scope.inbox.messages !== 'object') {
+            $scope.inbox.messages = {};
+        }
+
+        const createdAt = message.created_at ?? new Date().toISOString();
+        const dayKey = getMessageGroupKey(createdAt);
+
+        if (!Array.isArray($scope.inbox.messages[dayKey])) {
+            $scope.inbox.messages[dayKey] = [];
+        }
+
+        $scope.inbox.messages[dayKey].push({
+            ...message,
+            created_at: createdAt,
+        });
+    };
+
+    $scope.sendMessage = function() {
+        const url = route('back-end.home.sendMessage', {}, false, Ziggy);
+        const message = $scope.form.message?.trim() ?? '';
+
+        if (!message) {
+            return;
+        }
+
+        const payload = new URLSearchParams();
+        payload.append('inbox_id', $scope.active_inbox_id);
+        payload.append('message', message);
+        $http({
+            url: url,
+			ignoreLoadingBar: true,
+			method: "POST",
+			timeout: 30000,
+            data: payload.toString(),
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded",
+				"X-CSRF-TOKEN": getCsrfToken(),
+			},
+		}).then(
+        function(response) {
+            const payload = response.data?.data ?? {};
+            insertMessageIntoInbox(payload.message);
+            $scope.form.message = '';
+        }, function (error) {
+            console.error(error);
+        })
+    };
 
 }]);
 

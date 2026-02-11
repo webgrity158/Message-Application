@@ -15,5 +15,7 @@ Route::get('/presence/user/{user}', [PresenceController::class, 'status'])->name
 Route::controller(HomeController::class)->prefix('home')->as('home.')->group(function () {
     Route::post('/', 'initData')->name('initData');
     Route::post('/inbox', 'inboxData')->name('inboxData');
+    Route::post('/inbox', 'inboxData')->name('inboxData');
+    Route::post('/send-message', 'sendMessage')->name('sendMessage');
 
 });

@@ -39,4 +39,23 @@ class HomeController extends Controller
             ]
         ], 200);
     }
+
+    public function sendMessage(Request $request) {
+        $message = $this->messageService->sendMessage($request->inbox_id, $request->message);
+
+        if (! $message) {
+            return response()->json([
+                'success' => 0,
+                'message' => 'failed to send the message',
+            ], 500);
+        }
+
+        return response()->json([
+            'success' => 1,
+            'message' => 'success',
+            'data' => [
+                'message' => $this->messageService->formatMessageForClient($message),
+            ],
+        ], 200);
+    }
 }

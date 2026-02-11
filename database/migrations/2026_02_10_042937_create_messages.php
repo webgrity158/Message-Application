@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('is_refference_message', ['0', '1'])->default('0');
             $table->enum('has_attachments', ['0', '1'])->default('0');
             $table->string('attachment_path')->nullable();
-            $table->foreignId('refferenced_message_id')->constrained('messages')->cascadeOnUpdate()->cascadeOnDelete()->nullable();
+            $table->foreignId('refferenced_message_id')->nullable()->constrained('messages')->cascadeOnUpdate()->cascadeOnDelete();
             $table->timestamps();
         });
     }

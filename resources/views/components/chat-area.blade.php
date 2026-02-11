@@ -18,35 +18,37 @@
         </div>
     </header>
     <!-- Message Feed -->
-    <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar">
-        <div class="flex justify-center">
-            <span class="text-[11px] font-bold text-slate-400 dark:text-[#92adc9] bg-slate-100 dark:bg-[#233648] px-3 py-1 rounded-full uppercase tracking-widest">Today</span>
-        </div>
-        <!-- Sender Message -->
-        <div ng-repeat="message in inbox.messages" >
-            <div class="flex flex-row-reverse gap-3 max-w-[70%] ml-auto" ng-if="message.sent_by == user_id">
-                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 shrink-0 mt-auto" data-alt="Alex Johnson small avatar" style='background-image: url(<%user_avatar%>);'></div>
-                <div class="flex flex-col items-end">
-                    <div class="bg-primary text-white p-3.5 rounded-2xl rounded-br-none shadow-md shadow-primary/10 text-sm leading-relaxed">
-                        <%message.message%>
-                    </div>
-                    <div class="flex items-center gap-1 mt-1">
-                        <span class="text-[10px] text-slate-400"><%message.time%></span>
-                        <span ng-class="{'text-primary': message.is_seen, 'text-slate-400': !message.is_seen}" class="material-symbols-outlined text-[14px] shrink-0">
-                            done_all
-                        </span>
+    <div class="flex-1 overflow-y-auto p-6 space-y-6 no-scrollbar" >
+        <div ng-repeat="(day, messages) in inbox.messages">
+            <div class="flex justify-center mb-[5px]">
+                <span class="text-[11px] font-bold text-slate-400 dark:text-[#92adc9] bg-slate-100 dark:bg-[#233648] px-3 py-1 rounded-full uppercase tracking-widest"><%day%></span>
+            </div>
+            <!-- Sender Message -->
+            <div ng-repeat="message in messages" >
+                <div class="flex flex-row-reverse gap-3 max-w-[70%] ml-auto" ng-if="message.sent_by == user_id">
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 shrink-0 mt-auto" data-alt="Alex Johnson small avatar" style='background-image: url(<%user_avatar%>);'></div>
+                    <div class="flex flex-col items-end">
+                        <div class="bg-primary text-white p-3.5 rounded-2xl rounded-br-none shadow-md shadow-primary/10 text-sm leading-relaxed">
+                            <%message.message%>
+                        </div>
+                        <div class="flex items-center gap-1 mt-1">
+                            <span class="text-[10px] text-slate-400"><%message.time%></span>
+                            <span ng-class="{'text-primary': message.is_seen, 'text-slate-400': !message.is_seen}" class="material-symbols-outlined text-[14px] shrink-0">
+                                done_all
+                            </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Recipient Message -->
-            <div class="flex gap-3 max-w-[70%]" ng-if="message.sent_by != user_id">
-                <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 shrink-0 mt-auto" data-alt="Sarah Miller small avatar" style='background-image: url(<%inbox.avatar%>);'></div>
-                <div>
-                    <div class="bg-white dark:bg-[#233648] p-3.5 rounded-2xl rounded-bl-none shadow-sm text-sm leading-relaxed border border-slate-100 dark:border-transparent">
-                        <%message.message%>
+                
+                <!-- Recipient Message -->
+                <div class="flex gap-3 max-w-[70%]" ng-if="message.sent_by != user_id">
+                    <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8 shrink-0 mt-auto" data-alt="Sarah Miller small avatar" style='background-image: url(<%inbox.avatar%>);'></div>
+                    <div>
+                        <div class="bg-white dark:bg-[#233648] p-3.5 rounded-2xl rounded-bl-none shadow-sm text-sm leading-relaxed border border-slate-100 dark:border-transparent">
+                            <%message.message%>
+                        </div>
+                        <span class="text-[10px] text-slate-400 mt-1 block"><%message.time%></span>
                     </div>
-                    <span class="text-[10px] text-slate-400 mt-1 block"><%message.time%></span>
                 </div>
             </div>
         </div>
@@ -60,11 +62,11 @@
             <button class="p-2 text-slate-400 hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">sentiment_satisfied</span>
             </button>
-            <textarea class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-2 text-sm max-h-32 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#92adc9]" placeholder="Type a message..." rows="1"></textarea>
+            <textarea ng-model="form.message" ng-keyup="$event.keyCode == 13 ? sendMessage() : null" class="flex-1 bg-transparent border-none focus:ring-0 resize-none py-2 text-sm max-h-32 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-[#92adc9]" placeholder="Type a message..." rows="1"></textarea>
             <button class="p-2 text-slate-400 hover:text-primary transition-colors">
                 <span class="material-symbols-outlined">mic</span>
             </button>
-            <button class="bg-primary hover:bg-primary/90 text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-md shadow-primary/30">
+            <button ng-click="sendMessage()" class="bg-primary hover:bg-primary/90 text-white size-10 rounded-xl flex items-center justify-center transition-all shadow-md shadow-primary/30">
                 <span class="material-symbols-outlined">send</span>
             </button>
         </div>

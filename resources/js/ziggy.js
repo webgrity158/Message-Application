@@ -4,8 +4,12 @@ const baseRoutes = {
   "back-end.auth.register": { "uri": "auth/register", "methods": ["POST"] },
   "back-end.presence.userStatus": { "uri": "presence/user/{user}", "methods": ["GET"] },
   "front-end.home": { "uri": "home", "methods": ["GET", "HEAD"] },
+
   "back-end.home.initData": { "uri": "home", "methods": ["POST"] },
   "back-end.home.inboxData": { "uri": "home/inbox", "methods": ["POST"] },
+  "back-end.home.sendMessage": { "uri": "home/send-message", "methods": ["POST"] },
+
+  
   "storage.local": {
     "uri": "storage/{path}",
     "methods": ["GET", "HEAD"],
